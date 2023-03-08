@@ -1,7 +1,7 @@
 from datetime import date
 import requests, json
 
-def parse_date(d: date | str) -> date:
+def parse_date(d) -> date:
     if type(d) is date:
         return d
 
@@ -13,7 +13,7 @@ def parse_date(d: date | str) -> date:
     )
 
 class Edition:
-    def __init__(self, name: str, start: date | str, end: date | str):
+    def __init__(self, name: str, start, end):
         self.name = name
         self.start = parse_date(start)
         self.end = parse_date(end)
