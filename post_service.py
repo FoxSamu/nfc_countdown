@@ -46,37 +46,35 @@ async def cli(status: Status, loop):
         try:
             i = input("> ")
 
-            match i:
-                case "remaining":
-                    print("Posting each day at 12:00 noon, local time")
-                    print("Next post will be in", status.remaining())
-                    print("Type 'post' to post now")
-                case "post":
-                    await fetch_and_post()
-                case "help":
-                    print("Commands:")
-                    print(" - stop:      stop the service")
-                    print(" - exit:      alias for 'stop'")
-                    print(" - quit:      alias for 'stop'")
-                    print(" - remaining: print remaining time until next post")
-                    print(" - post:      immediately post")
-                    print(" - help:      print this menu")
-                case "stop":
-                    print("Stop")
-                    loop.stop()
-                    return
-                case "exit":
-                    print("Exit")
-                    loop.stop()
-                    return
-                case "quit":
-                    print("Quit")
-                    loop.stop()
-                    return
-
-                case other:
-                    print("Unknown command: " + other)
-                    print("Type 'help' for a list of commands")
+            if i == "remaining":
+                print("Posting each day at 12:00 noon, local time")
+                print("Next post will be in", status.remaining())
+                print("Type 'post' to post now")
+            elif i == "post":
+                await fetch_and_post()
+            elif i == "help":
+                print("Commands:")
+                print(" - stop:      stop the service")
+                print(" - exit:      alias for 'stop'")
+                print(" - quit:      alias for 'stop'")
+                print(" - remaining: print remaining time until next post")
+                print(" - post:      immediately post")
+                print(" - help:      print this menu")
+            elif i == "stop":
+                print("Stop")
+                loop.stop()
+                return
+            elif i == "exit":
+                print("Exit")
+                loop.stop()
+                return
+            elif i == "quit":
+                print("Quit")
+                loop.stop()
+                return
+            else:
+                print("Unknown command: " + i)
+                print("Type 'help' for a list of commands")
 
         except KeyboardInterrupt:
             print("")
