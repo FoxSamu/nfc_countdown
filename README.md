@@ -1,6 +1,12 @@
 # How to use
 - Clone this repository
 - Navigate into the cloned repository
+- Create a file `config.json` and add the following:
+  ```
+  {
+      "edition_url": "https://shadew.net/assets/nfcdata.json"
+  }
+  ```
 - Install required modules
   ```
   pip3 install -r requirements.txt

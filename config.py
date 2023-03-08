@@ -40,6 +40,26 @@ class Config:
         if 'size' in json:
             self.sizes = [int(json['size'])]
 
+        if 'telegram_token' in json:
+            self.telegram_token = str(json['telegram_token'])
+        else:
+            self.telegram_token = None
+
+        if 'telegram_channel' in json:
+            self.telegram_channel = str(json['telegram_channel'])
+        else:
+            self.telegram_channel = None
+
+        if 'info_json_url' in json:
+            self.info_json_url = str(json['info_json_url'])
+        else:
+            self.info_json_url = None
+
+        if 'banner_image_url' in json:
+            self.banner_image_url = str(json['banner_image_url'])
+        else:
+            self.banner_image_url = None
+
 def load_config(path) -> Config:
     with open(path) as f:
         return Config(json.load(f))
