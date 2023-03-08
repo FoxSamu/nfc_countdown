@@ -6,7 +6,7 @@ import traceback
 
 cfg = config.load_config('./config.json')
 
-__posters: list[Post] = [
+__posters: list = [
     TelegramPost(cfg)
 ]
 
