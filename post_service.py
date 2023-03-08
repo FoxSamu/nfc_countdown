@@ -86,6 +86,9 @@ async def cli(status: Status, loop):
             print("SystemExit")
             loop.stop()
             return
+        except EOFError:
+            print("EOF found, CLI disabled")
+            return
         except:
             print(traceback.format_exc())
 
