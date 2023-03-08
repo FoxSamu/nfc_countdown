@@ -97,6 +97,9 @@ class Generator:
         if not self._should_generate():
             log.debug("Not generating images as they are up to date")
             return
+        
+        self.last_edition_name = self.edition.name
+        self.last_days_ago = self.edition.days_difference()
 
         log.info("Regenerating banner images")
 
