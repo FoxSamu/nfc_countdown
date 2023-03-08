@@ -3,7 +3,7 @@
 - Navigate into the cloned repository
 - Install required modules
   ```
-  pip install -r requirements.txt
+  pip3 install -r requirements.txt
   ```
 - The repository contains a file `server.sh`, run this script using `bash`
   ```bash
@@ -12,7 +12,7 @@
 
   Alternatively, run the Python command itself (not recommended)
   ```bash
-  python server.py
+  python3 server.py
   ```
 
 The `server.sh` file can be configured to run as a UNIX service.
