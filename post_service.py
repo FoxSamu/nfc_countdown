@@ -1,6 +1,7 @@
 from post import Post, format_message
 from post_telegram import TelegramPost
 from datetime import date, datetime, timedelta
+from consts import *
 import config
 import requests
 import asyncio
@@ -10,7 +11,7 @@ import sys
 
 _cli_enabled = not ('-s' in sys.argv)
 
-_cfg = config.load_config('./config.json')
+_cfg = config.load_config(CONFIG_PATH)
 
 _posters: list = [
     TelegramPost(_cfg)

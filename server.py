@@ -1,12 +1,13 @@
 from bottle import route, run, template, static_file, response, HTTPError
 
 from generator import Generator
+from consts import *
 import config
 import log
 import json
 import traceback
 
-cfg = config.load_config("./config.json")
+cfg = config.load_config(CONFIG_PATH)
 log.info("Config loaded")
 gen = Generator(cfg)
 
