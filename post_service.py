@@ -3,19 +3,22 @@ from post_telegram import TelegramPost
 from datetime import date, datetime, timedelta
 import config, requests, asyncio, log, time
 import traceback
+import sys
 
-cfg = config.load_config('./config.json')
+_cli_enabled = not ('-s' in sys.argv)
 
-__posters: list = [
-    TelegramPost(cfg)
+_cfg = config.load_config('./config.json')
+
+_posters: list = [
+    TelegramPost(_cfg)
 ]
 
-async def fetch_and_post():
-    info = requests.get(cfg.info_json_url).json()
+async def _fetch_and_post():
+    info = requests.get(_cfg.info_json_url).json()
     msg = format_message(info)
-    url = cfg.banner_image_url
+    url = _cfg.banner_image_url
 
-    for post in __posters:
+    for post in _posters:
         log.debug("Posting to " + type(post).__name__)
         await post.post(url, msg)
 
@@ -51,7 +54,7 @@ async def cli(status: Status, loop):
                 print("Next post will be in", status.remaining())
                 print("Type 'post' to post now")
             elif i == "post":
-                await fetch_and_post()
+                await _fetch_and_post()
             elif i == "help":
                 print("Commands:")
                 print(" - stop:      stop the service")
@@ -95,7 +98,9 @@ async def cli(status: Status, loop):
 
 async def main(loop):
     status = Status()
-    loop.create_task(cli(status, loop))
+
+    if _cli_enabled:
+        loop.create_task(cli(status, loop))
 
     while True:
         try:
@@ -106,7 +111,7 @@ async def main(loop):
             if delta.days > 0:
                 print("Posting...")
                 status.last_post = _last_12h()
-                await fetch_and_post()
+                await _fetch_and_post()
 
             await asyncio.sleep(5)
 
@@ -125,7 +130,14 @@ async def main(loop):
 
 
 if __name__ == "__main__":
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.create_task(main(loop))
-    loop.run_forever()
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.create_task(main(loop))
+        loop.run_forever()
+    except KeyboardInterrupt:
+        print("")
+        print("KeyboardInterrupt")
+    except SystemExit:
+        print("")
+        print("SystemExit")

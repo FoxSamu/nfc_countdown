@@ -1,4 +1,5 @@
 import log
+import requests
 from config import Config
 from post import Post
 
@@ -24,13 +25,17 @@ class TelegramPost(Post):
         if self.bot == None:
             self.bot = Bot(self.token)
 
-        try:
-            await self.bot.send_photo(
-                chat_id=self.channel,
-                caption=message,
-                photo=img_url
-            )
+        with requests.get(img_url) as img:
+            if img.status_code != 200:
+                log.error("Failed to load image, received status code " + img.status_code)
 
-            log.debug("Posted to Telegram channel " + self.channel + "!")
-        except Forbidden:
-            log.error("No access to send message in channel " + self.channel + "!")
+            try:
+                await self.bot.send_photo(
+                    chat_id=self.channel,
+                    caption=message,
+                    photo=img.content
+                )
+
+                log.debug("Posted to Telegram channel " + self.channel + "!")
+            except Forbidden:
+                log.error("No access to send message in channel " + self.channel + "!")
