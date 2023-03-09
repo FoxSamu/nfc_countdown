@@ -35,8 +35,8 @@ def generate(edition, text, assets_path = "./assets/", generated_path = "./gener
 
     for size in sizes:
         with Image.open(assets_path + BANNER_FILE_NAME + "_" + str(size) + ".png") as im:
-            fnt1 = ImageFont.truetype(FONT_ASSET, asSize(267, size))
-            fnt2 = ImageFont.truetype(FONT_ASSET, asSize(160, size))
+            fnt1 = ImageFont.truetype(assets_path + FONT_ASSET, asSize(267, size))
+            fnt2 = ImageFont.truetype(assets_path + FONT_ASSET, asSize(160, size))
 
             draw = ImageDraw.Draw(im)
             draw.fontmode = "L"
