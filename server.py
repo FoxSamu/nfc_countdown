@@ -21,7 +21,7 @@ def banner_1920():
     try:
         gen.generate()
     except Exception as e:
-        return HTTPError(500, body="Failed to generate", exception=e)
+        return HTTPError(500, exception=e)
     response = static_file('daystonfc_1920.png', root='./generated/')
     response.set_header('Cache-Control', 'no-store')
     return response
@@ -31,7 +31,7 @@ def banner_800():
     try:
         gen.generate()
     except Exception as e:
-        return HTTPError(500, body="Failed to generate", exception=e)
+        return HTTPError(500, exception=e)
     response = static_file('daystonfc_800.png', root='./generated/')
     response.set_header('Cache-Control', 'no-store')
     return response
@@ -41,7 +41,7 @@ def banner_400():
     try:
         gen.generate()
     except Exception as e:
-        return HTTPError(500, body="Failed to generate", exception=e)
+        return HTTPError(500, exception=e)
     response = static_file('daystonfc_400.png', root='./generated/')
     response.set_header('Cache-Control', 'no-store')
     return response
@@ -51,7 +51,7 @@ def banner_200():
     try:
         gen.generate()
     except Exception as e:
-        return HTTPError(500, body="Failed to generate", exception=e)
+        return HTTPError(500, exception=e)
     response = static_file('daystonfc_200.png', root='./generated/')
     response.set_header('Cache-Control', 'no-store')
     return response
