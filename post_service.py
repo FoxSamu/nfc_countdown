@@ -1,7 +1,10 @@
 from post import Post, format_message
 from post_telegram import TelegramPost
 from datetime import date, datetime, timedelta
-import config, requests, asyncio, log, time
+import config
+import requests
+import asyncio
+import log
 import traceback
 import sys
 
