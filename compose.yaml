@@ -24,7 +24,7 @@ services:
 
   post:
     pull_policy: never
-    image: samu/server:0.1
+    image: samu/server
     command: ["python3", "/usr/src/app/post_service.py", "-s", ">>", "/var/log/post_service.log"]
     stop_signal: SIGINT
     volumes:
