@@ -114,10 +114,9 @@ async def main(loop):
 
             if delta.days > 0:
                 print("Posting...")
-                status.last_post = _last_12h()
+                # Post before updating time, so if it goes wrong it automatically retries in 5 seconds
                 await _fetch_and_post()
-
-            await asyncio.sleep(5)
+                status.last_post = _last_12h()
 
         except KeyboardInterrupt:
             print("")
@@ -131,6 +130,8 @@ async def main(loop):
             return
         except:
             print(traceback.format_exc())
+
+        await asyncio.sleep(5)
 
 
 if __name__ == "__main__":

@@ -13,6 +13,15 @@
       "telegram_channel": "@<insert telegram channel name>"
   }
   ```
+
+# Running using docker compose
+- This is very straightforward:
+  ```
+  docker compose up -d
+  ```
+
+
+# Running manually
 - Install required modules
   ```
   pip3 install -r requirements.txt

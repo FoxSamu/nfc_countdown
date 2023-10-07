@@ -57,4 +57,5 @@ def banner_200():
     response.set_header('Cache-Control', 'no-store')
     return response
 
-run(host='localhost', port=3000)
+if __name__ == '__main__':
+	run(host='0.0.0.0', port=3000)

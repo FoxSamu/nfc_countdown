@@ -1,4 +1,4 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
-python3 post_service.py -s >> ./post_service.log
+python3 post_service.py

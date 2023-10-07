@@ -27,7 +27,7 @@ class TelegramPost(Post):
 
         with requests.get(img_url) as img:
             if img.status_code != 200:
-                log.error("Failed to load image, received status code " + img.status_code)
+                log.error("Failed to load image, received status code " + str(img.status_code))
 
             try:
                 await self.bot.send_photo(
