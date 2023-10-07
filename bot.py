@@ -1,5 +1,6 @@
 import logging
 import config
+import sys
 
 from consts import *
 from telegram import *
@@ -9,7 +10,6 @@ logging.basicConfig(
     format='[%(levelname)s] %(asctime)s - %(name)s: %(message)s',
     level=logging.INFO
 )
-
 
 _cfg = config.load_config(CONFIG_PATH)
 
@@ -28,8 +28,6 @@ async def init(app: Application):
             BotCommand("post", "If you are an admin at " + _cfg.telegram_channel + ", re-post today's update")
         ]
     )
-
-    pass
 
 
 
@@ -88,8 +86,7 @@ async def isitnfc(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text="No"
     )
 
-
-if __name__ == '__main__':
+async def build_app() -> Application:
     application = ApplicationBuilder()             \
                   .token(_cfg.telegram_token)      \
                   .post_init(init)                 \
@@ -100,4 +97,4 @@ if __name__ == '__main__':
     application.add_handler(CommandHandler('post', post))
     application.add_handler(CommandHandler('isitnfc', isitnfc))
 
-    application.run_polling()
+    return application

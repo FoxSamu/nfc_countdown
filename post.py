@@ -35,6 +35,10 @@ def format_message(info: dict):
     
     return f'{ed}: {msg} {smile}'
 
+def format_yes_no(info: dict):
+    smile = __get_smile(info['diff'])
+    return ('Yes' if info['diff'] == 0 else 'No') + ' ' + smile
+
 class Post:
     def __init__(self, cfg: Config):
         self.config = cfg
