@@ -2,11 +2,11 @@ version: '3'
 
 services:
   base:
-    build: .
     pull_policy: never
     image: samu/server
 
   server:
+    build: .
     pull_policy: never
     image: samu/server
     command: ["python3", "server.py"]
@@ -14,7 +14,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app
+      - .:/code
       - logs:/var/log
     networks:
       - net
@@ -23,12 +23,13 @@ services:
     restart: always
 
   post:
+    build: .
     pull_policy: never
     image: samu/server
     command: ["python3", "post_service.py", "-s"]
     stop_signal: SIGINT
     volumes:
-      - .:/usr/src/app
+      - .:/code
       - logs:/var/log
     networks:
       - net

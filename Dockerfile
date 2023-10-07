@@ -1,6 +1,6 @@
 FROM python:3.12.0-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /
 
 RUN apk add -u zlib-dev jpeg-dev gcc musl-dev krb5-dev freetype-dev
 RUN python3 -m pip install --upgrade pip
