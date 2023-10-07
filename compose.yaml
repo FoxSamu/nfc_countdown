@@ -21,6 +21,8 @@ services:
     depends_on:
       - base
     restart: always
+    env_file:
+      - stack.env
 
   post:
     build: .
@@ -37,6 +39,8 @@ services:
       - server
       - base
     restart: always
+    env_file:
+      - stack.env
 
 networks:
   net:
