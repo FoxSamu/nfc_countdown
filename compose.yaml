@@ -9,7 +9,7 @@ services:
   server:
     pull_policy: never
     image: samu/server
-    command: ["python3", "/usr/src/app/server.py", ">>", "/var/log/server.log"]
+    command: ["python3", "server.py"]
     stop_signal: SIGINT
     ports:
       - "3000:3000"
@@ -25,7 +25,7 @@ services:
   post:
     pull_policy: never
     image: samu/server
-    command: ["python3", "/usr/src/app/post_service.py", "-s", ">>", "/var/log/post_service.log"]
+    command: ["python3", "post_service.py", "-s"]
     stop_signal: SIGINT
     volumes:
       - .:/usr/src/app
