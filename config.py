@@ -1,4 +1,4 @@
-import json
+import json, os
 
 class Config:
     def __init__(self, json: dict):
@@ -60,6 +60,53 @@ class Config:
         else:
             self.banner_image_url = None
 
+    
+
 def load_config(path) -> Config:
+    if path == "[ENV]":
+        return load_config_from_env()
     with open(path) as f:
         return Config(json.load(f))
+    
+
+def load_config_from_env() -> Config:
+    d = dict()
+    env = os.environ
+
+    if 'EDITION_URL' in env:
+        d["edition_url"] = str(env['EDITION_URL'])
+
+    if 'START_DATE' in env:
+        d["start_date"] = str(env['START_DATE'])
+
+    if 'END_DATE' in env:
+        d["end_date"] = str(env['END_DATE'])
+
+    if 'EDITION_NAME' in env:
+        d["edition_name"] = str(env['EDITION_NAME'])
+
+    if 'GENERATED_PATH' in env:
+        d["generated_path"] = str(env['GENERATED_PATH'])
+
+    if 'ASSETS_PATH' in env:
+        d["assets_path"] = str(env['ASSETS_PATH'])
+
+    if 'SIZES' in env:
+        d["sizes"] = env['SIZES'].split(',')
+
+    if 'SIZE' in env:
+        d["size"] = int(env['SIZE'])
+
+    if 'TELEGRAM_TOKEN' in env:
+        d["telegram_token"] = str(env['TELEGRAM_TOKEN'])
+
+    if 'TELEGRAM_CHANNEL' in env:
+        d["telegram_channel"] = str(env['TELEGRAM_CHANNEL'])
+
+    if 'INFO_JSON_URL' in env:
+        d["info_json_url"] = str(env['INFO_JSON_URL'])
+
+    if 'BANNER_IMAGE_URL' in env:
+        d["banner_image_url"] = str(env['BANNER_IMAGE_URL'])
+
+    return Config(d)

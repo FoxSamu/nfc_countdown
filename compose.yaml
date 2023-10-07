@@ -15,7 +15,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-      - ./logs:/var/log
+      - logs:/var/log
     networks:
       - net
     depends_on:
@@ -29,7 +29,7 @@ services:
     stop_signal: SIGINT
     volumes:
       - .:/usr/src/app
-      - ./logs:/var/log
+      - logs:/var/log
     networks:
       - net
     depends_on:
@@ -39,3 +39,6 @@ services:
 
 networks:
   net:
+
+volumes:
+  logs:
